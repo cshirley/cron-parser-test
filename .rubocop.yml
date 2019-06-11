@@ -1,0 +1,43 @@
+require: rubocop-rspec
+
+AllCops:
+  ExtraDetails: true
+  DisplayStyleGuide: true
+  TargetRubyVersion: 2.5
+  TargetRailsVersion: 5.2
+
+  Exclude:
+    - 'bin/**/*'
+    - 'app/views/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'vendor/**/*'
+
+Rails:
+  # https://www.rubocop.org/en/latest/cops_rails/
+  Enabled: true
+
+Metrics/LineLength:
+  # This cop checks the length of lines in the source code. The maximum length is configurable. The tab size is configured in the IndentationWidth of the Layout/Tab cop.
+  # https://www.rubocop.org/en/latest/cops_metrics/#metricslinelength
+  Max: 120
+  Enabled: true
+
+Layout/DotPosition:
+  # This cop checks the . position in multi-line method calls.
+  # https://www.rubocop.org/en/latest/cops_layout/#layoutdotposition
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'app/admin/**/*'
+  ExcludedMethods: ['it', 'describe', 'context']
+
+RSpec/NamedSubject:
+  Enabled: false
