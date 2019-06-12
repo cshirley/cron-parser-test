@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
 module Cron
   RSpec.describe Parser do
     subject { described_class.call(**params) }
