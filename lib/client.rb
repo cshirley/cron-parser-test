@@ -17,7 +17,7 @@ class Client
   #
   # @return [String] space tabulated and expanded CRON task
   def call
-    return "Usage #{@caller} MINUTE HOUR DOM DOW MONTH COMMAND" unless args.count == 6
+    return "Usage #{@caller} MINUTE HOUR DOM MONTH DOW COMMAND" unless args.count == 6
 
     params = Hash[::Cron::Parser::PARAMETER_OPTIONS.zip(args)]
 
