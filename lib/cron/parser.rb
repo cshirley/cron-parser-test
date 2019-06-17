@@ -23,6 +23,10 @@ module Cron
       ).call
     end
 
+    def initialize(**opts)
+      @options = opts
+    end
+
     # Parses the input
     #
     # @return [Hash] - expand values with the following keys:
@@ -62,10 +66,6 @@ module Cron
                          SINGLE_ITEM_RANGE => :build_item_range }.freeze
 
     attr_reader :options
-
-    def initialize(**opts)
-      @options = opts
-    end
 
     def parse(name, value)
       return value if name == :command
