@@ -33,7 +33,7 @@ module Cron
         end
 
         it 'renders command in string' do
-          expect(subject).to match(/command\s+test\n/)
+          expect(subject).to match(/command\s+test/)
         end
       end
     end
