@@ -19,7 +19,13 @@ class Client
   def call
     return "Usage #{@caller} MINUTE HOUR DOM MONTH DOW COMMAND" unless args.count == 6
 
-    params = Hash[::Cron::Parser::PARAMETER_OPTIONS.zip(args)]
+    param_keys = if args.length == 7
+                   ::Cron::Parser::PARAMETER_OPTIONS_YEAR
+                 else
+                   ::Cron::Parser::PARAMETER_OPTIONS
+                 end
+
+    params = Hash[param_keys.zip(args)]
 
     ::Cron::Formatter.call(
       ::Cron::Parser.call(params)

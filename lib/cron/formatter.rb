@@ -9,6 +9,7 @@ module Cron
                    dom: 'day of month',
                    month: 'month',
                    dow: 'day of week',
+                   year: 'year',
                    command: 'command' }.freeze
 
     PADDING = TRANSCODES.values.map(&:length).max + TAB

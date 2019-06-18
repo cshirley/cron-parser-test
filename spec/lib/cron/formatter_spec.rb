@@ -9,6 +9,7 @@ module Cron
         let(:params) do
           { minute: [1], hour: [2],
             dom: [3], month: [4], dow: [5, 6],
+            year: [2001],
             command: 'test' }
         end
 
@@ -30,6 +31,10 @@ module Cron
 
         it 'renders day of week in string' do
           expect(subject).to match(/day of week\s+5 6\n/)
+        end
+
+        it 'renders year in string' do
+          expect(subject).to match(/year\s+2001\n/)
         end
 
         it 'renders command in string' do

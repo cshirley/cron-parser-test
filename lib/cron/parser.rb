@@ -6,6 +6,7 @@ module Cron
     ParseError = Class.new(StandardError)
 
     PARAMETER_OPTIONS = %i[minute hour dom month dow command].freeze
+    PARAMETER_OPTIONS_YEAR = %i[minute hour dom month dow year command].freeze
 
     # Expands the CRON tokens
     #
@@ -17,9 +18,10 @@ module Cron
     # @param [String] dom - day of month 1-31
     # @param [String] month - month number 1-12
     # @param [String] dow - Day of week number
-    def self.call(minute:, hour:, dom:, month:, dow:, command:)
+    # @param [String] year - Year 1970-2099
+    def self.call(minute:, hour:, dom:, month:, dow:, year: '*', command:)
       new(
-        minute: minute, hour: hour, dom: dom, month: month, dow: dow, command: command
+        minute: minute, hour: hour, dom: dom, month: month, dow: dow, year: year, command: command
       ).call
     end
 
@@ -52,7 +54,8 @@ module Cron
       hour: { min: 0, max: 23 },
       dom: { min: 1, max: 31 },
       dow: { min: 1, max: 7 },
-      month: { min: 1, max: 12 }
+      month: { min: 1, max: 12 },
+      year: { min: 1970, max: 2099 }
     }.freeze
 
     SUB_RANGE = '-'
@@ -140,7 +143,8 @@ module Cron
     def range_valid?(start, stop, min, max, step = 1)
       start >= min && start < max &&
         stop > min && stop <= max && stop > start &&
-        step.positive? && step < max
+        step.positive? && step < max &&
+        start < stop
     end
 
     def raise_parse_error(name, value)
